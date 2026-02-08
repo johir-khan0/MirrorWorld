@@ -30,9 +30,10 @@
   gap: 1.5rem;
   z-index: 100;
   border-radius: 0;
-  border-top: none;
-  border-left: none;
-  border-right: none;
+  border-bottom: 1px solid var(--bg-panel-border);
+  background: var(--bg-panel); /* Ensure background is strict */
+  height: 100%; /* Fill the grid area */
+  max-height: 100%;
 }
 
 .app-header-left {

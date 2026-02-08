@@ -32,7 +32,7 @@
     --card-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.82);
 
     /* --- Layout --- */
-    --header-height: max-content;
+    --header-height: 60px;
     --sidebar-width: 360px;
     --border-radius-sm: 4px;
     --border-radius-md: 8px;

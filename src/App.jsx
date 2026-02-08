@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Component } from 'react';
+import React, { useState, useEffect, Component, useRef, useCallback } from 'react';
 import { SimulationProvider, useSimulation } from './simulation/SimulationContext';
 import ChatPanel from './chat/ChatPanel';
 import GraphVisualizer from './visualization/GraphVisualizer';
@@ -69,6 +69,43 @@ function AppLayout() {
     const [themeMode, setThemeMode] = useState(getInitialTheme);
     const [defenseActive, setDefenseActive] = useState(false);
 
+    // Resizable Sidebar State
+    const [sidebarWidth, setSidebarWidth] = useState(320);
+    const isResizingRef = useRef(false);
+
+    const startResizing = useCallback((e) => {
+        e.preventDefault(); // Prevent text selection
+        isResizingRef.current = true;
+        document.body.style.cursor = 'col-resize';
+        document.body.style.userSelect = 'none';
+        // Add class to show active state
+        document.querySelector('.sidebar-resizer')?.classList.add('active');
+    }, []);
+
+    const stopResizing = useCallback(() => {
+        isResizingRef.current = false;
+        document.body.style.cursor = 'default';
+        document.body.style.userSelect = 'auto';
+        document.querySelector('.sidebar-resizer')?.classList.remove('active');
+    }, []);
+
+    const resize = useCallback((e) => {
+        if (isResizingRef.current) {
+            // Constrain width between 260px and 800px (approx 50% of 1080p)
+            const newWidth = Math.max(260, Math.min(e.clientX, 800));
+            setSidebarWidth(newWidth);
+        }
+    }, []);
+
+    useEffect(() => {
+        window.addEventListener('mousemove', resize);
+        window.addEventListener('mouseup', stopResizing);
+        return () => {
+            window.removeEventListener('mousemove', resize);
+            window.removeEventListener('mouseup', stopResizing);
+        };
+    }, [resize, stopResizing]);
+
     // Manual Control State (Lifted)
     const [activeTool, setActiveTool] = useState('CURSOR'); // CURSOR, CONNECT, or NODE_TYPE
     const [selectedNodeId, setSelectedNodeId] = useState(null);
@@ -122,7 +159,7 @@ function AppLayout() {
     };
 
     return (
-        <div className="app-shell">
+        <div className="app-shell" style={{ '--sidebar-width': `${sidebarWidth}px` }}>
             {/* --- Header: System Telemetry --- */}
             <header className="glass-panel app-header">
                 <div className="app-header-left">
@@ -212,6 +249,7 @@ function AppLayout() {
             {/* --- Sidebar: Intelligence Layer --- */}
             <div className="app-sidebar">
                 <ChatPanel demoActive={demoActive} setDemoActive={setDemoActive} />
+                <div className="sidebar-resizer" onMouseDown={startResizing} />
             </div>
 
             {/* --- Main Viewport: Visualization --- */}

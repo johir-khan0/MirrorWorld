@@ -1,5 +1,6 @@
 :root {
-  --layout-columns: minmax(260px, var(--sidebar-width)) minmax(0, 1fr);
+  --sidebar-width: 320px; /* Default width */
+  --layout-columns: var(--sidebar-width) 1fr;
   --layout-rows: var(--header-height) 1fr;
   --layout-areas: "header header" "sidebar viewport";
   --metrics-panel-expanded: 300px;
@@ -11,7 +12,7 @@
   height: 100vh;
   width: 100%;
   display: grid;
-  grid-template-columns: var(--layout-columns, minmax(260px, var(--sidebar-width)) minmax(0, 1fr));
+  grid-template-columns: var(--sidebar-width) 1fr;
   grid-template-rows: var(--layout-rows, var(--header-height) 1fr);
   grid-template-areas: var(--layout-areas, "header header" "sidebar viewport");
   background: var(--bg-deep);
@@ -146,7 +147,25 @@
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   z-index: 50;
-  overflow: hidden;
+  overflow: hidden; /* Be careful not to hide the resizer if it's positioned on the edge */
+  position: relative;
+}
+
+.sidebar-resizer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 4px;
+  height: 100%;
+  cursor: col-resize;
+  background: transparent;
+  z-index: 1000;
+  transition: background 0.2s ease;
+}
+
+.sidebar-resizer:hover, .sidebar-resizer.active {
+  background: var(--accent-primary);
+  box-shadow: 0 0 10px var(--accent-primary);
 }
 
 .app-viewport {

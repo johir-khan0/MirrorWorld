@@ -37,6 +37,16 @@
   flex-wrap: wrap; /* Allow wrapping on small screens */
 }
 
+/* Desktop: enforce compact header height to match design */
+@media (min-width: 901px) {
+  .app-header {
+    height: var(--header-height);
+    max-height: var(--header-height);
+    overflow: hidden;
+    flex-wrap: nowrap;
+  }
+}
+
 .app-header-left {
   display: flex;
   align-items: center;

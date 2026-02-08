@@ -23,16 +23,17 @@
 
 .app-header {
   grid-area: header;
-  padding: 0 1.5rem;
+  padding: 0 1rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1.5rem;
+  gap: 1rem;
   z-index: 100;
   border-radius: 0;
   border-bottom: 1px solid var(--bg-panel-border);
   background: var(--bg-panel); 
   height: var(--header-height); /* Strict numeric height */
+  overflow: hidden; /* Prevent content from pushing bounds */
 }
 
 .app-header-left {

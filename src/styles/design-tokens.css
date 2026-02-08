@@ -1,0 +1,228 @@
+:root {
+    color-scheme: dark;
+    /* --- Palette: OLED Deep Black & Cyber Accents --- */
+    --bg-deep: #020204;
+    --bg-panel: rgba(10, 10, 15, 0.75);
+    --bg-panel-border: rgba(255, 255, 255, 0.08);
+
+    --accent-primary: #00f3ff;
+    /* Neon Cyan */
+    --accent-secondary: #7000ff;
+    /* Electric Purple */
+    --accent-danger: #ff004c;
+    /* Cyber Red */
+    --accent-warning: #ffbd00;
+    /* Amber */
+    --accent-success: #00ffa3;
+    /* Emerald */
+
+    --text-main: #f0f0f5;
+    --text-dim: #9494b8;
+    --text-muted: #5c5c7a;
+
+    /* --- Typography --- */
+    --font-ui: 'Inter', system-ui, -apple-system, sans-serif;
+    --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+
+    /* --- Effects --- */
+    --glow-primary: 0 0 20px rgba(0, 243, 255, 0.25);
+    --glow-secondary: 0 0 20px rgba(112, 0, 255, 0.25);
+    --glass-blur: blur(20px);
+    --glass-background: rgba(15, 15, 25, 0.4);
+    --card-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.82);
+
+    /* --- Layout --- */
+    --header-height: 64px;
+    --sidebar-width: 360px;
+    --border-radius-sm: 4px;
+    --border-radius-md: 8px;
+    --border-radius-lg: 16px;
+    --sidebar-bg: rgba(10, 10, 15, 0.4);
+    --control-strip-bg: rgba(255, 255, 255, 0.02);
+    --control-strip-border: rgba(255, 255, 255, 0.03);
+    --viewport-bg: radial-gradient(circle at 50% 50%, #080810 0%, #020204 100%);
+    --viewport-grid-line: rgba(0, 243, 255, 0.03);
+    --timeline-track: rgba(255, 255, 255, 0.05);
+    --glass-button-bg: rgba(255, 255, 255, 0.05);
+    --glass-button-border: rgba(255, 255, 255, 0.1);
+    --glass-button-hover-bg: rgba(255, 255, 255, 0.1);
+    --glass-button-hover-border: rgba(255, 255, 255, 0.2);
+}
+
+:root[data-theme='day'] {
+    color-scheme: light;
+    --bg-deep: #f4f6fb;
+    --bg-panel: rgba(255, 255, 255, 0.9);
+    --bg-panel-border: rgba(15, 23, 42, 0.08);
+    --accent-primary: #0078ff;
+    --accent-secondary: #7a49ff;
+    --accent-danger: #ff004c;
+    --accent-warning: #f5a300;
+    --accent-success: #0f9f6e;
+
+    --text-main: #121629;
+    --text-dim: #4d5169;
+    --text-muted: #7b80a0;
+
+    --glow-primary: 0 0 20px rgba(0, 120, 255, 0.18);
+    --glow-secondary: 0 0 20px rgba(122, 73, 255, 0.18);
+    --glass-blur: blur(18px);
+    --glass-background: rgba(255, 255, 255, 0.92);
+    --card-shadow: 0 10px 40px rgba(15, 23, 42, 0.12);
+
+    --sidebar-bg: rgba(255, 255, 255, 0.75);
+    --control-strip-bg: rgba(255, 255, 255, 0.7);
+    --control-strip-border: rgba(15, 23, 42, 0.12);
+    --viewport-bg: radial-gradient(circle at 50% 50%, #ffffff 0%, #d7e2ff 100%);
+    --viewport-grid-line: rgba(13, 55, 120, 0.1);
+    --timeline-track: rgba(15, 23, 42, 0.12);
+    --glass-button-bg: rgba(15, 23, 42, 0.08);
+    --glass-button-border: rgba(15, 23, 42, 0.16);
+    --glass-button-hover-bg: rgba(15, 23, 42, 0.12);
+    --glass-button-hover-border: rgba(15, 23, 42, 0.26);
+}
+
+/* Glassmorphism Utilities */
+.glass-panel {
+    background: var(--glass-background);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--bg-panel-border);
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--card-shadow);
+}
+
+.glass-card {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: var(--border-radius-md);
+    padding: 1rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-button {
+    background: var(--glass-button-bg);
+    backdrop-filter: blur(8px);
+    border: 1px solid var(--glass-button-border);
+    color: var(--text-main);
+    padding: 8px 16px;
+    border-radius: var(--border-radius-md);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-weight: 600;
+    font-size: 0.75rem;
+    letter-spacing: 0.5px;
+}
+
+.glass-button:hover {
+    background: var(--glass-button-hover-bg);
+    border-color: var(--glass-button-hover-border);
+    transform: translateY(-1px);
+}
+
+.glass-button.active {
+    background: rgba(0, 243, 255, 0.1);
+    border-color: rgba(0, 243, 255, 0.3);
+    color: var(--accent-primary);
+    box-shadow: 0 0 15px rgba(0, 243, 255, 0.1);
+}
+
+.btn-primary-glass {
+    background: linear-gradient(135deg, rgba(112, 0, 255, 0.4), rgba(80, 0, 204, 0.4));
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(112, 0, 255, 0.3);
+    color: #fff;
+    box-shadow: 0 4px 15px rgba(112, 0, 255, 0.2);
+}
+
+.btn-primary-glass:hover {
+    background: linear-gradient(135deg, rgba(112, 0, 255, 0.5), rgba(80, 0, 204, 0.5));
+    border-color: rgba(112, 0, 255, 0.5);
+    box-shadow: 0 6px 20px rgba(112, 0, 255, 0.3);
+}
+
+/* Typography Helpers */
+.text-gradient {
+    background: linear-gradient(135deg, #fff 0%, var(--text-dim) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.font-mono {
+    font-family: var(--font-mono);
+    letter-spacing: -0.02em;
+}
+
+/* Animations */
+@keyframes pulse-glow {
+
+    0%,
+    100% {
+        box-shadow: 0 0 10px rgba(0, 243, 255, 0.1);
+    }
+
+    50% {
+        box-shadow: 0 0 25px rgba(0, 243, 255, 0.35);
+    }
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+@keyframes scanline {
+    0% {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+}
+
+.animate-pulse-glow {
+    animation: pulse-glow 3s infinite ease-in-out;
+}
+
+.animate-float {
+    animation: float 4s infinite ease-in-out;
+}
+
+/* Global Scrollbar Refinement */
+::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 99px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.15);
+}

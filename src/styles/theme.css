@@ -1,0 +1,53 @@
+/* src/styles/theme.css */
+:root {
+  /* Dynamic Palette - Future Tech */
+  --color-bg-main: #030308;
+  --color-bg-panel: rgba(18, 18, 28, 0.65);
+  --color-bg-panel-hover: rgba(28, 28, 40, 0.75);
+  
+  --color-accent-primary: #00f3ff;   /* Cyber Cyan */
+  --color-accent-secondary: #ff006e; /* Neon Rose */
+  --color-accent-tertiary: #7000ff;  /* Electric Violet */
+
+  --color-status-ok: #00ff9d;
+  --color-status-warn: #ffbd00;
+  --color-status-critical: #ff003c;
+
+  --color-text-main: #ffffff;
+  --color-text-muted: #9494a8;
+  --color-text-dim: #565666;
+
+  --border-glass: 1px solid rgba(255, 255, 255, 0.08);
+  --border-glass-light: 1px solid rgba(255, 255, 255, 0.15);
+
+  --shadow-glow-primary: 0 0 20px rgba(0, 243, 255, 0.15);
+  --shadow-glow-secondary: 0 0 20px rgba(255, 0, 110, 0.15);
+  
+  --backdrop-blur: blur(16px);
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+
+  /* Animation */
+  --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Utilities */
+.glass-panel {
+  background: var(--color-bg-panel);
+  backdrop-filter: var(--backdrop-blur);
+  -webkit-backdrop-filter: var(--backdrop-blur);
+  border: var(--border-glass);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+}
+
+.text-gradient {
+  background: linear-gradient(135deg, var(--color-accent-primary), var(--color-accent-tertiary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}

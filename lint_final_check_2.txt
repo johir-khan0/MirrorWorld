@@ -1,0 +1,10 @@
+﻿
+> mirrorworld-ai@0.0.0 lint
+> eslint .
+
+
+E:\Downloads\MirrorWorld Ai\src\chat\ChatPanel.jsx
+  79:11  error  'simulateUserTyping' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+Γ£û 1 problem (1 error, 0 warnings)
+

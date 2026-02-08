@@ -32,8 +32,9 @@
   border-radius: 0;
   border-bottom: 1px solid var(--bg-panel-border);
   background: var(--bg-panel); 
-  height: var(--header-height); /* Strict numeric height */
-  overflow: hidden; /* Prevent content from pushing bounds */
+  min-height: var(--header-height); /* Flexible min-height */
+  height: auto;
+  flex-wrap: wrap; /* Allow wrapping on small screens */
 }
 
 .app-header-left {
@@ -685,6 +686,93 @@
     align-items: flex-start;
   }
 }
+
+/* --- Enhanced Mobile Responsiveness --- */
+@media (max-width: 900px) {
+  .app-shell {
+    /* Switch to Flexbox for vertical stacking on mobile/tablet */
+    display: flex !important;
+    flex-direction: column;
+    height: auto !important;
+    min-height: 100vh;
+    width: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    
+    /* Override inline grid styles */
+    grid-template-columns: none !important;
+    grid-template-rows: none !important;
+    grid-template-areas: none !important;
+  }
+
+  /* Order: Header -> Viewport -> Sidebar */
+  .app-header {
+      order: 1;
+      width: 100%;
+      flex-wrap: wrap;
+      height: auto;
+      min-height: auto;
+      padding: 1rem;
+      gap: 1rem;
+  }
+  
+  .app-viewport {
+      order: 2;
+      position: relative;
+      width: 100%;
+      height: 50vh !important; /* Visuals take top half */
+      min-height: 400px;
+      flex: none;
+      overflow: hidden;
+      border-bottom: 1px solid var(--bg-panel-border);
+  }
+  
+  .app-sidebar {
+      order: 3;
+      width: 100%;
+      height: auto;
+      flex: 1; /* Sidebar takes remaining height */
+      min-height: 500px; /* Ensure chat is usable */
+      border-right: none;
+      border-top: 1px solid var(--bg-panel-border);
+  }
+  
+  .sidebar-resizer { 
+      display: none; 
+  }
+  
+  /* Component Adjustments */
+  .app-control-strip {
+      width: 100%;
+      overflow-x: auto;
+  }
+  
+  .metrics-hud {
+      width: 90%;
+      bottom: 10px;
+  }
+}
+
+@media (max-width: 600px) {
+  .app-header-left, .app-right-actions {
+      flex-direction: column;
+      align-items: stretch;
+      width: 100%;
+      gap: 0.75rem;
+  }
+
+  .app-viewport {
+      height: 40vh !important;
+      min-height: 300px;
+  }
+  
+  .reasoning-overlay {
+      width: calc(100% - 2rem);
+      left: 1rem;
+      bottom: 1rem;
+  }
+}
+
 
  
  
